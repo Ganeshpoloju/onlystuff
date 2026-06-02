@@ -1,0 +1,469 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  member
+  outsider_seller
+  admin
+}
+
+enum AadhaarStatus {
+  pending
+  approved
+  rejected
+}
+
+enum CommunityStatus {
+  pending
+  active
+  suspended
+  rejected
+}
+
+enum ListingType {
+  product
+  service
+}
+
+enum PricingModel {
+  fixed
+  slab
+}
+
+enum ListingStatus {
+  draft
+  active
+  paused
+  out_of_stock
+  pending_review
+  removed
+  expired
+}
+
+enum ListingVisibility {
+  community
+  everyone
+}
+
+enum OrderStatus {
+  placed
+  confirmed
+  in_progress
+  closed
+  disputed
+  fully_closed
+  cancelled
+}
+
+enum BookingStatus {
+  pending
+  confirmed
+  declined
+  completed
+  cancelled
+  closed
+  disputed
+  fully_closed
+}
+
+enum BookingRecurrence {
+  none
+  weekly
+  biweekly
+  monthly
+}
+
+enum GroupBuyStatus {
+  open
+  locked
+  completed
+  cancelled
+  extended
+}
+
+enum ReportReason {
+  fake
+  inappropriate
+  spam
+  fraud
+  other
+}
+
+enum ReportStatus {
+  open
+  reviewed
+  dismissed
+}
+
+model User {
+  id                    String        @id @default(cuid())
+  googleId              String        @unique
+  email                 String        @unique
+  name                  String
+  avatarUrl             String?
+  phone                 String?
+  bio                   String?
+  role                  UserRole      @default(member)
+  aadhaarStatus         AadhaarStatus @default(pending)
+  aadhaarFrontUrl       String?
+  aadhaarBackUrl        String?
+  aadhaarRejectionReason String?
+  communityId           String?
+  bannedAt              DateTime?
+  bannedReason          String?
+  suspendedUntil        DateTime?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  community             Community?    @relation("CommunityMembers", fields: [communityId], references: [id])
+  listings              Listing[]
+  buyerOrders           Order[]       @relation("BuyerOrders")
+  sellerOrders          Order[]       @relation("SellerOrders")
+  buyerBookings         Booking[]
+  initiatedGroupBuys    GroupBuy[]    @relation("InitiatorGroupBuys")
+  groupBuyMemberships   GroupBuyMember[]
+  sentMessages          Message[]     @relation("SentMessages")
+  receivedMessages      Message[]     @relation("ReceivedMessages")
+  groupBuyMessages      GroupBuyMessage[]
+  notifications         Notification[]
+  reviewsGiven          Review[]      @relation("ReviewsGiven")
+  reviewsReceived       Review[]      @relation("ReviewsReceived")
+  vouchesGiven          Vouch[]       @relation("VouchesGiven")
+  vouchesReceived       Vouch[]       @relation("VouchesReceived")
+  reports               Report[]      @relation("ReporterReports")
+  reportedIn            Report[]      @relation("ReportedUserReports")
+  requestedCommunities  Community[]   @relation("CommunityRequests")
+  approvedCommunities   Community[]   @relation("CommunityApprovals")
+  adminLogs             AdminLog[]
+  closedOrders          Order[]       @relation("OrderClosedBy")
+  disputedOrders        Order[]       @relation("OrderDisputedBy")
+  resolvedDisputes      Order[]       @relation("OrderDisputeResolver")
+
+  @@map("users")
+}
+
+model Community {
+  id               String          @id @default(cuid())
+  name             String
+  slug             String          @unique
+  address          String
+  lat              Float
+  lng              Float
+  radiusMetres     Int             @default(500)
+  householdCount   Int?
+  status           CommunityStatus @default(pending)
+  rejectionReason  String?
+  memberCount      Int             @default(0)
+  activeListingCount Int           @default(0)
+  requestedById    String?
+  approvedById     String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  requestedBy      User?           @relation("CommunityRequests", fields: [requestedById], references: [id])
+  approvedBy       User?           @relation("CommunityApprovals", fields: [approvedById], references: [id])
+  members          User[]          @relation("CommunityMembers")
+  listings         Listing[]
+
+  @@map("communities")
+}
+
+model Listing {
+  id                  String           @id @default(cuid())
+  sellerId            String
+  communityId         String?
+  title               String
+  description         String
+  type                ListingType
+  category            String
+  condition           String?
+  photos              String[]
+  pricingModel        PricingModel     @default(fixed)
+  fixedPrice          Float?
+  moq                 Int?
+  stockQty            Int?
+  fulfillment         Json             @default("{}")
+  visibility          ListingVisibility @default(everyone)
+  status              ListingStatus    @default(active)
+  boostUntil          DateTime?
+  promotedCommunities String[]
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+
+  seller              User             @relation(fields: [sellerId], references: [id])
+  community           Community?       @relation(fields: [communityId], references: [id])
+  serviceConfig       ServiceConfig?
+  priceSlabs          PriceSlab[]
+  orders              Order[]
+  bookings            Booking[]
+  groupBuys           GroupBuy[]
+  messages            Message[]
+  reports             Report[]
+
+  @@map("listings")
+}
+
+model ServiceConfig {
+  id               String  @id @default(cuid())
+  listingId        String  @unique
+  slotDurationMins Int
+  bufferMins       Int     @default(0)
+  workingDays      String[]
+  workingHoursStart String
+  workingHoursEnd  String
+  maxConcurrent    Int     @default(1)
+  serviceAreaKm    Float?
+
+  listing          Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  blockedSlots     BlockedSlot[]
+
+  @@map("service_configs")
+}
+
+model BlockedSlot {
+  id              String      @id @default(cuid())
+  serviceConfigId String
+  blockedDate     DateTime
+  blockedStart    String
+  blockedEnd      String
+  reason          String?
+
+  serviceConfig   ServiceConfig @relation(fields: [serviceConfigId], references: [id], onDelete: Cascade)
+
+  @@map("blocked_slots")
+}
+
+model PriceSlab {
+  id           String  @id @default(cuid())
+  listingId    String
+  fromQty      Int
+  toQty        Int?
+  pricePerUnit Float
+  position     Int
+
+  listing      Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@map("price_slabs")
+}
+
+model Order {
+  id                  String      @id @default(cuid())
+  listingId           String
+  buyerId             String
+  sellerId            String
+  quantity            Int
+  unitPrice           Float
+  totalPrice          Float
+  fulfillmentMethod   String
+  deliveryPartner     String?
+  deliveryFee         Float?
+  status              OrderStatus @default(placed)
+  closedById          String?
+  closedAt            DateTime?
+  fullyClosedAt       DateTime?
+  disputedById        String?
+  disputeReason       String?
+  disputePhotos       String[]
+  disputeResolvedById String?
+  disputeResolution   String?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  listing             Listing     @relation(fields: [listingId], references: [id])
+  buyer               User        @relation("BuyerOrders", fields: [buyerId], references: [id])
+  seller              User        @relation("SellerOrders", fields: [sellerId], references: [id])
+  closedBy            User?       @relation("OrderClosedBy", fields: [closedById], references: [id])
+  disputedBy          User?       @relation("OrderDisputedBy", fields: [disputedById], references: [id])
+  disputeResolver     User?       @relation("OrderDisputeResolver", fields: [disputeResolvedById], references: [id])
+  reviews             Review[]
+
+  @@map("orders")
+}
+
+model Booking {
+  id                String            @id @default(cuid())
+  listingId         String
+  buyerId           String
+  slotDate          DateTime
+  slotStart         String
+  slotEnd           String
+  status            BookingStatus     @default(pending)
+  recurrence        BookingRecurrence @default(none)
+  recurrenceSeriesId String?
+  notes             String?
+  cancelReason      String?
+  rescheduleCount   Int               @default(0)
+  closedById        String?
+  closedAt          DateTime?
+  disputeReason     String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  listing           Listing           @relation(fields: [listingId], references: [id])
+  buyer             User              @relation(fields: [buyerId], references: [id])
+
+  @@map("bookings")
+}
+
+model GroupBuy {
+  id                 String         @id @default(cuid())
+  listingId          String
+  initiatorId        String
+  targetQty          Int
+  committedQty       Int            @default(0)
+  targetPricePerUnit Float
+  status             GroupBuyStatus @default(open)
+  expiresAt          DateTime
+  extendedAt         DateTime?
+  createdAt          DateTime       @default(now())
+
+  listing            Listing        @relation(fields: [listingId], references: [id])
+  initiator          User           @relation("InitiatorGroupBuys", fields: [initiatorId], references: [id])
+  members            GroupBuyMember[]
+  messages           GroupBuyMessage[]
+
+  @@map("group_buys")
+}
+
+model GroupBuyMember {
+  id          String   @id @default(cuid())
+  groupBuyId  String
+  userId      String
+  quantity    Int
+  joinedAt    DateTime @default(now())
+
+  groupBuy    GroupBuy @relation(fields: [groupBuyId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@unique([groupBuyId, userId])
+  @@map("group_buy_members")
+}
+
+model Message {
+  id          String   @id @default(cuid())
+  listingId   String
+  senderId    String
+  receiverId  String
+  content     String?
+  imageUrls   String[]
+  readAt      DateTime?
+  createdAt   DateTime @default(now())
+
+  listing     Listing  @relation(fields: [listingId], references: [id])
+  sender      User     @relation("SentMessages", fields: [senderId], references: [id])
+  receiver    User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+
+  @@map("messages")
+}
+
+model GroupBuyMessage {
+  id          String   @id @default(cuid())
+  groupBuyId  String
+  senderId    String
+  content     String?
+  imageUrls   String[]
+  createdAt   DateTime @default(now())
+
+  groupBuy    GroupBuy @relation(fields: [groupBuyId], references: [id], onDelete: Cascade)
+  sender      User     @relation(fields: [senderId], references: [id])
+
+  @@map("group_buy_messages")
+}
+
+model Review {
+  id           String   @id @default(cuid())
+  orderId      String
+  reviewerId   String
+  revieweeId   String
+  rating       Int
+  comment      String?
+  response     String?
+  respondedAt  DateTime?
+  createdAt    DateTime @default(now())
+
+  order        Order    @relation(fields: [orderId], references: [id])
+  reviewer     User     @relation("ReviewsGiven", fields: [reviewerId], references: [id])
+  reviewee     User     @relation("ReviewsReceived", fields: [revieweeId], references: [id])
+
+  @@unique([orderId, reviewerId])
+  @@map("reviews")
+}
+
+model Vouch {
+  id         String    @id @default(cuid())
+  voucherId  String
+  voucheeId  String
+  createdAt  DateTime  @default(now())
+  revokedAt  DateTime?
+
+  voucher    User      @relation("VouchesGiven", fields: [voucherId], references: [id])
+  vouchee    User      @relation("VouchesReceived", fields: [voucheeId], references: [id])
+
+  @@map("vouches")
+}
+
+model Report {
+  id             String       @id @default(cuid())
+  reporterId     String
+  listingId      String?
+  reportedUserId String?
+  reason         ReportReason
+  description    String?
+  status         ReportStatus @default(open)
+  reviewedById   String?
+  reviewedAt     DateTime?
+  createdAt      DateTime     @default(now())
+
+  reporter       User         @relation("ReporterReports", fields: [reporterId], references: [id])
+  listing        Listing?     @relation(fields: [listingId], references: [id])
+  reportedUser   User?        @relation("ReportedUserReports", fields: [reportedUserId], references: [id])
+
+  @@map("reports")
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  type      String
+  title     String
+  body      String
+  metadata  Json      @default("{}")
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+model DeliveryPartner {
+  id            String   @id @default(cuid())
+  name          String
+  slug          String   @unique
+  enabled       Boolean  @default(false)
+  apiBaseUrl    String?
+  apiKeyEnvVar  String?
+  createdAt     DateTime @default(now())
+
+  @@map("delivery_partners")
+}
+
+model AdminLog {
+  id         String   @id @default(cuid())
+  adminId    String
+  action     String
+  targetType String
+  targetId   String
+  metadata   Json     @default("{}")
+  createdAt  DateTime @default(now())
+
+  admin      User     @relation(fields: [adminId], references: [id])
+
+  @@map("admin_logs")
+}

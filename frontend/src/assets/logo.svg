@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="none">
+  <!-- Circle icon: O with a location pin dot -->
+  <circle cx="24" cy="24" r="20" fill="url(#grad)" />
+  <circle cx="24" cy="20" r="6" fill="white" />
+  <path d="M24 26 C18 26 14 30 14 34 C14 36 16 38 24 38 C32 38 34 36 34 34 C34 30 30 26 24 26Z" fill="white" opacity="0.3"/>
+  <circle cx="24" cy="38" r="2.5" fill="white"/>
+
+  <!-- Wordmark: onlyStuff -->
+  <text x="52" y="31" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" font-size="22" fill="#1a1a1a" letter-spacing="-0.5">only</text>
+  <text x="100" y="31" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" font-size="22" fill="url(#grad)" letter-spacing="-0.5">Stuff</text>
+
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#F7931E"/>
+    </linearGradient>
+  </defs>
+</svg>
