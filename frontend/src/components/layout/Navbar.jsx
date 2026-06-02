@@ -6,8 +6,7 @@ import { useNotifications } from '../../hooks/useNotifications';
 import Avatar from '../ui/Avatar';
 import logo from '../../assets/logo.svg';
 
-function NotificationDropdown({ onClose }) {
-  const { notifications, unreadCount, markRead } = useNotifications();
+function NotificationDropdown({ onClose, notifications, markRead }) {
 
   return (
     <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50">
@@ -42,7 +41,7 @@ function NotificationDropdown({ onClose }) {
 
 export default function Navbar() {
   const { user } = useAuthStore();
-  const { unreadCount } = useNotifications();
+  const { unreadCount, notifications, markRead } = useNotifications();
   const [showNotifs, setShowNotifs] = useState(false);
   const notifRef = useRef(null);
 
@@ -94,7 +93,7 @@ export default function Navbar() {
               </span>
             )}
           </button>
-          {showNotifs && <NotificationDropdown onClose={() => setShowNotifs(false)} />}
+          {showNotifs && <NotificationDropdown onClose={() => setShowNotifs(false)} notifications={notifications} markRead={markRead} />}
         </div>
 
         {/* Profile page — coming soon */}

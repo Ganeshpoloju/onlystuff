@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import api from '../lib/api';
 import { getSocket } from './useSocket';
 import { toast } from '../store/uiStore';
+import { useAuthStore } from '../store/authStore';
 
 const NOTIFICATION_MESSAGES = {
   order_placed:      { title: 'New order!',         message: 'Someone placed an order on your listing.' },
@@ -19,11 +20,14 @@ const NOTIFICATION_MESSAGES = {
 export function useNotifications() {
   const qc = useQueryClient();
   const registered = useRef(false);
+  const { user } = useAuthStore();
 
   const { data: notifications = [] } = useQuery({
     queryKey: ['notifications'],
     queryFn: () => api.get('/users/me/notifications').then(r => r.data),
     staleTime: 30_000,
+    enabled: !!user && user.aadhaarStatus === 'approved',
+    retry: false,
   });
 
   // Register socket listener once — stable singleton, no dependency churn
