@@ -7,6 +7,17 @@ import Button from '../../components/ui/Button';
 import Spinner from '../../components/ui/Spinner';
 import { useState } from 'react';
 
+// Convert a Drive view URL to a direct thumbnail URL that loads in <img> tags
+function driveThumb(url) {
+  if (!url) return '';
+  // Extract file ID from both formats:
+  // https://drive.google.com/uc?export=view&id=FILE_ID
+  // https://drive.google.com/file/d/FILE_ID/view
+  const match = url.match(/[?&]id=([^&]+)/) || url.match(/\/d\/([^/]+)\//);
+  if (match) return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w400`;
+  return url;
+}
+
 export default function AadhaarQueue() {
   const qc = useQueryClient();
   const [rejectReason, setRejectReason] = useState({});
@@ -42,8 +53,30 @@ export default function AadhaarQueue() {
                   <div><p className="font-semibold text-sm">{u.name}</p><p className="text-xs text-gray-400">{u.email}</p></div>
                 </div>
                 <div className="grid grid-cols-2 gap-2 mb-4">
-                  <a href={u.aadhaarFrontUrl} target="_blank" rel="noreferrer"><img src={u.aadhaarFrontUrl} alt="Front" className="rounded-lg border border-gray-200 w-full h-32 object-cover" /></a>
-                  <a href={u.aadhaarBackUrl} target="_blank" rel="noreferrer"><img src={u.aadhaarBackUrl} alt="Back" className="rounded-lg border border-gray-200 w-full h-32 object-cover" /></a>
+                  {[['Front', u.aadhaarFrontUrl], ['Back', u.aadhaarBackUrl]].map(([label, url]) => (
+                    <a key={label} href={url} target="_blank" rel="noreferrer" className="block">
+                      <div className="rounded-lg border border-gray-200 w-full h-32 bg-gray-50 overflow-hidden relative group">
+                        <img
+                          src={driveThumb(url)}
+                          alt={label}
+                          className="w-full h-full object-cover"
+                          onError={e => {
+                            // Fallback: show a placeholder with open-in-new-tab link
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'flex';
+                          }}
+                        />
+                        <div className="hidden absolute inset-0 flex-col items-center justify-center gap-1 text-gray-400 text-xs">
+                          <span className="text-2xl">🪪</span>
+                          <span>{label} — click to open</span>
+                        </div>
+                        <div className="absolute bottom-1 left-1 bg-black/50 text-white text-[10px] px-1.5 py-0.5 rounded font-medium">{label}</div>
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                          <span className="text-white text-xs font-semibold bg-black/50 px-2 py-1 rounded">Open full size ↗</span>
+                        </div>
+                      </div>
+                    </a>
+                  ))}
                 </div>
                 <input className="input mb-3 text-sm" placeholder="Rejection reason (if rejecting)..." value={rejectReason[u.id] || ''} onChange={e => setRejectReason(p => ({ ...p, [u.id]: e.target.value }))} />
                 <div className="flex gap-2">
