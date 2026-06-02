@@ -1,10 +1,7 @@
-const LocalStorage = require('./LocalStorage');
-// const GoogleDriveStorage = require('./GoogleDriveStorage');
-// const S3Storage = require('./S3Storage');
-// const GCSStorage = require('./GCSStorage');
+const GoogleDriveStorage = require('./GoogleDriveStorage');
 
-// Active storage: LocalStorage for prototype
-// Swap to S3/GCS by changing this one line — interface is identical
-const storage = new LocalStorage();
+// To swap storage: replace this with new S3Storage() or new GCSStorage()
+// The interface (upload, getUrl, delete) stays the same.
+const storage = new GoogleDriveStorage();
 
 module.exports = storage;

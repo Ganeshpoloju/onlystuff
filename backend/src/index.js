@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const http = require('http');
-const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
@@ -27,14 +26,11 @@ const server = http.createServer(app);
 
 initSocket(server);
 
-app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
+app.use(helmet());
 app.use(cors({
   origin: [process.env.CLIENT_URL, process.env.LANDING_URL],
   credentials: true,
 }));
-
-// Serve uploaded files (local storage for prototype)
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

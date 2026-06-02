@@ -40,6 +40,3 @@ coverage/
 **/google-oauth-client.json
 **/service-account*.json
 onlystuff-*.json
-
-# Uploaded files (local storage)
-backend/uploads/
