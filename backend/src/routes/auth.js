@@ -33,10 +33,19 @@ router.post('/logout', (req, res) => {
   res.json({ success: true });
 });
 
-// Get current user
-router.get('/me', requireAuth, (req, res) => {
-  const { id, email, name, avatarUrl, role, aadhaarStatus, communityId, phone } = req.user;
-  res.json({ id, email, name, avatarUrl, role, aadhaarStatus, communityId, phone });
+// Get current user — include community so the frontend can show the community name
+router.get('/me', requireAuth, async (req, res) => {
+  const prisma = require('../config/db');
+  const user = await prisma.user.findUnique({
+    where: { id: req.user.id },
+    select: {
+      id: true, email: true, name: true, avatarUrl: true,
+      role: true, aadhaarStatus: true, aadhaarFrontUrl: true,
+      communityId: true, phone: true,
+      community: { select: { id: true, name: true, lat: true, lng: true } },
+    },
+  });
+  res.json(user);
 });
 
 module.exports = router;

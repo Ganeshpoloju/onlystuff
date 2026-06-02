@@ -2,17 +2,47 @@ import { Link } from 'react-router-dom';
 import { MapPin, Users } from 'lucide-react';
 import Badge from '../ui/Badge';
 
+const CATEGORY_EMOJI = {
+  'Groceries & Produce': '🥦',
+  'Electronics': '💻',
+  'Furniture': '🛋️',
+  'Kitchen & Appliances': '🍳',
+  'Clothing & Accessories': '👕',
+  'Books & Stationery': '📚',
+  'Toys & Games': '🎮',
+  'Sports & Fitness': '🏋️',
+  'Home Decor': '🏡',
+  'Plants & Gardening': '🌿',
+  'Baby & Kids': '🍼',
+  'Vehicles & Accessories': '🚗',
+  'Home Repairs': '🔧',
+  'Cleaning': '🧹',
+  'Tutoring & Coaching': '📖',
+  'Fitness & Wellness': '💪',
+  'Pet Care': '🐾',
+  'Beauty & Grooming': '💅',
+  'Photography': '📷',
+  'Music & Arts': '🎵',
+  'Transport & Moving': '🚚',
+  'IT & Tech Support': '🖥️',
+};
+
 export default function ListingCard({ listing }) {
+  const firstSlab = listing.priceSlabs?.[0]?.pricePerUnit;
   const price = listing.pricingModel === 'fixed'
-    ? `₹${listing.fixedPrice}`
-    : `From ₹${listing.priceSlabs?.[0]?.pricePerUnit ?? '—'}`;
+    ? `₹${listing.fixedPrice?.toLocaleString('en-IN')}`
+    : firstSlab
+      ? `From ₹${firstSlab.toLocaleString('en-IN')}`
+      : '—';
+
+  const emoji = CATEGORY_EMOJI[listing.category] ?? (listing.type === 'service' ? '🔧' : '📦');
 
   return (
     <Link to={`/listings/${listing.id}`} className="card overflow-hidden hover:shadow-md transition-shadow group">
       <div className="aspect-square bg-gray-100 overflow-hidden">
         {listing.photos?.[0]
           ? <img src={listing.photos[0]} alt={listing.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-          : <div className="w-full h-full flex items-center justify-center text-3xl">📦</div>
+          : <div className="w-full h-full flex items-center justify-center text-5xl bg-gradient-to-br from-gray-50 to-gray-100">{emoji}</div>
         }
       </div>
       <div className="p-3">

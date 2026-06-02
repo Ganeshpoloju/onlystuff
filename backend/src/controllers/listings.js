@@ -25,6 +25,7 @@ async function searchListings(req, res, next) {
       include: {
         seller: { select: { id: true, name: true, avatarUrl: true } },
         community: { select: { id: true, name: true, lat: true, lng: true } },
+        priceSlabs: { orderBy: { position: 'asc' } },
         _count: { select: { groupBuys: true } },
       },
       orderBy: { createdAt: 'desc' },
