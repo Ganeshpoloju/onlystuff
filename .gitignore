@@ -35,6 +35,10 @@ coverage/
 *.tmp
 *.temp
 
+# Environment variables — local only, never commit
+backend/.env
+frontend/.env
+
 # Google credentials — NEVER commit these
 **/google-service-account.json
 **/google-oauth-client.json
