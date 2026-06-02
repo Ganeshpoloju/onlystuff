@@ -3,6 +3,7 @@ import { useAuthStore } from './store/authStore';
 import { useEffect } from 'react';
 import api from './lib/api';
 import ToastContainer from './components/ui/Toast';
+import { initSocket } from './hooks/useSocket';
 
 // Auth pages
 import Login from './pages/auth/Login';
@@ -62,7 +63,11 @@ export default function App() {
   useEffect(() => {
     setLoading(true);
     api.get('/auth/me')
-      .then(r => setUser(r.data))
+      .then(r => {
+        setUser(r.data);
+        // Initialise socket once, after we know user is authenticated
+        initSocket();
+      })
       .catch(() => setUser(null))
       .finally(() => setLoading(false));
   }, []);

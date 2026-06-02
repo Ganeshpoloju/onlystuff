@@ -1,12 +1,24 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import api from '../lib/api';
-import { useSocket } from './useSocket';
+import { getSocket } from './useSocket';
 import { toast } from '../store/uiStore';
+
+const NOTIFICATION_MESSAGES = {
+  order_placed:      { title: 'New order!',         message: 'Someone placed an order on your listing.' },
+  order_confirmed:   { title: 'Order confirmed',    message: 'The seller confirmed your order.' },
+  order_closed:      { title: 'Order closed',       message: 'An order has been marked as closed.' },
+  booking_request:   { title: 'New booking',        message: 'Someone requested a booking.' },
+  booking_confirmed: { title: 'Booking confirmed',  message: 'Your booking has been confirmed.' },
+  booking_declined:  { title: 'Booking declined',   message: 'Your booking request was declined.' },
+  new_message:       { title: 'New message',        message: 'You have a new message.' },
+  groupbuy_locked:   { title: 'Group Buy locked!',  message: 'The group buy hit its target.' },
+  groupbuy_expiring: { title: 'Group Buy expiring', message: 'Your group buy expires in 6 hours.' },
+};
 
 export function useNotifications() {
   const qc = useQueryClient();
-  const socket = useSocket();
+  const registered = useRef(false);
 
   const { data: notifications = [] } = useQuery({
     queryKey: ['notifications'],
@@ -14,28 +26,25 @@ export function useNotifications() {
     staleTime: 30_000,
   });
 
-  // Real-time: show toast + update badge on incoming socket notification
+  // Register socket listener once — stable singleton, no dependency churn
   useEffect(() => {
+    if (registered.current) return;
+    const socket = getSocket();
     if (!socket) return;
+    registered.current = true;
+
     const handler = (notification) => {
       qc.invalidateQueries({ queryKey: ['notifications'] });
-      const messages = {
-        order_placed:       { title: 'New order!',        message: 'Someone placed an order on your listing.' },
-        order_confirmed:    { title: 'Order confirmed',   message: 'The seller confirmed your order.' },
-        order_closed:       { title: 'Order closed',      message: 'An order has been marked as closed.' },
-        booking_request:    { title: 'New booking',       message: 'Someone requested a booking.' },
-        booking_confirmed:  { title: 'Booking confirmed', message: 'Your booking has been confirmed.' },
-        booking_declined:   { title: 'Booking declined',  message: 'Your booking request was declined.' },
-        new_message:        { title: 'New message',       message: 'You have a new message.' },
-        groupbuy_locked:    { title: 'Group Buy locked!', message: 'The group buy hit its target.' },
-        groupbuy_expiring:  { title: 'Group Buy expiring', message: 'Your group buy expires in 6 hours.' },
-      };
-      const m = messages[notification.type] ?? { title: 'New notification', message: '' };
-      toast.info(m.message, m.title);
+      const m = NOTIFICATION_MESSAGES[notification.type] ?? { title: 'New notification', message: '' };
+      if (m.message) toast.info(m.message, m.title);
     };
+
     socket.on('new_notification', handler);
-    return () => socket.off('new_notification', handler);
-  }, [socket, qc]);
+    return () => {
+      socket.off('new_notification', handler);
+      registered.current = false;
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const markRead = useMutation({
     mutationFn: (id) => api.patch(`/users/me/notifications/${id}/read`),
