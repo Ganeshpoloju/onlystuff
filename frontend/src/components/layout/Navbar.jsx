@@ -97,9 +97,8 @@ export default function Navbar() {
           {showNotifs && <NotificationDropdown onClose={() => setShowNotifs(false)} />}
         </div>
 
-        <Link to="/profile">
-          <Avatar src={user?.avatarUrl} name={user?.name} size="sm" />
-        </Link>
+        {/* Profile page — coming soon */}
+        <Avatar src={user?.avatarUrl} name={user?.name} size="sm" className="cursor-pointer" />
       </div>
     </header>
   );

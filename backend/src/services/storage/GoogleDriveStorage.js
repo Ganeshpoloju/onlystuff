@@ -5,13 +5,16 @@ const StorageService = require('./StorageService');
 class GoogleDriveStorage extends StorageService {
   constructor() {
     super();
-    const path = require('path');
-    const keyPath = path.resolve(process.cwd(), process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH);
-    const auth = new google.auth.GoogleAuth({
-      keyFile: keyPath,
-      scopes: ['https://www.googleapis.com/auth/drive'],
+    // OAuth2 with personal account refresh token — no service account needed
+    const oauth2Client = new google.auth.OAuth2(
+      process.env.GOOGLE_CLIENT_ID,
+      process.env.GOOGLE_CLIENT_SECRET,
+      process.env.GOOGLE_CALLBACK_URL
+    );
+    oauth2Client.setCredentials({
+      refresh_token: process.env.GOOGLE_DRIVE_REFRESH_TOKEN,
     });
-    this.drive = google.drive({ version: 'v3', auth });
+    this.drive = google.drive({ version: 'v3', auth: oauth2Client });
     this.rootFolderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
   }
 
@@ -39,7 +42,7 @@ class GoogleDriveStorage extends StorageService {
     const res = await this.drive.files.create({
       requestBody: { name: fileName, parents: [folderId] },
       media: { mimeType, body: stream },
-      fields: 'id, webViewLink, webContentLink',
+      fields: 'id',
     });
 
     // Make file publicly readable
@@ -48,7 +51,6 @@ class GoogleDriveStorage extends StorageService {
       requestBody: { role: 'reader', type: 'anyone' },
     });
 
-    // Return a direct view URL
     return `https://drive.google.com/uc?export=view&id=${res.data.id}`;
   }
 
