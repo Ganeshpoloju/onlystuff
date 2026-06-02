@@ -35,7 +35,5 @@ coverage/
 *.tmp
 *.temp
 
-# Google credentials (never commit these)
-**/google-service-account.json
-**/google-oauth-client.json
-**/service-account*.json
+# Google credentials intentionally included in repo (prototype — team access)
+# Remove these lines and rotate keys before going to production
