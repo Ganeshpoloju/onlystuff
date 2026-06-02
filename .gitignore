@@ -34,3 +34,8 @@ coverage/
 # Temp
 *.tmp
 *.temp
+
+# Google credentials (never commit these)
+**/google-service-account.json
+**/google-oauth-client.json
+**/service-account*.json
