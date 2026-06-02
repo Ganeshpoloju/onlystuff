@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from './store/authStore';
 import { useEffect } from 'react';
 import api from './lib/api';
+import ToastContainer from './components/ui/Toast';
 
 // Auth pages
 import Login from './pages/auth/Login';
@@ -33,6 +34,8 @@ import Analytics from './pages/admin/Analytics';
 
 import BottomNav from './components/layout/BottomNav';
 import Spinner from './components/ui/Spinner';
+import ChatWindow from './pages/chat/ChatWindow';
+import ChatList from './pages/chat/ChatList';
 
 function RequireLogin({ children }) {
   const { user, loading } = useAuthStore();
@@ -66,6 +69,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
         {/* Public */}
         <Route path="/login" element={<Login />} />
@@ -81,6 +85,8 @@ export default function App() {
         <Route path="/listings/:id" element={<ProtectedRoute><ListingDetail /></ProtectedRoute>} />
         <Route path="/buy/group-buys" element={<ProtectedRoute><GroupBuys /></ProtectedRoute>} />
         <Route path="/buy/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+        <Route path="/chat" element={<ProtectedRoute><ChatList /></ProtectedRoute>} />
+        <Route path="/chat/:listingId" element={<ProtectedRoute><ChatWindow /></ProtectedRoute>} />
 
         {/* Sell */}
         <Route path="/sell" element={<ProtectedRoute><MyListings /></ProtectedRoute>} />

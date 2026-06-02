@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
+require('./jobs/cron');
 
 const { initSocket } = require('./config/socket');
 require('./config/passport');

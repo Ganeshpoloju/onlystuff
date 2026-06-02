@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateY(12px) scale(.97); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);   }
+  }
+  @keyframes toast-bar {
+    from { width: 100%; }
+    to   { width: 0%; }
+  }
+  .animate-toast-in  { animation: toast-in  .22s ease forwards; }
+  .animate-toast-bar { animation: toast-bar linear forwards; }
+}
+
 @layer base {
   * { box-sizing: border-box; }
   body { @apply font-sans text-gray-900 bg-gray-50 antialiased; }

@@ -321,6 +321,7 @@ model GroupBuy {
   status             GroupBuyStatus @default(open)
   expiresAt          DateTime
   extendedAt         DateTime?
+  warnedAt           DateTime?
   createdAt          DateTime       @default(now())
 
   listing            Listing        @relation(fields: [listingId], references: [id])

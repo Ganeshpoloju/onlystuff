@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"D:/Projects/hyd local swiggy\" status)",
+      "Bash(npm --version)",
+      "Bash(git --version)",
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(node *)",
+      "Bash(npm install *)",
+      "Bash(npx prisma *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:4000/health)",
+      "Bash(curl -s -X POST http://localhost:4000/auth/logout)",
+      "Bash(npx kill-port *)"
+    ]
+  }
+}
