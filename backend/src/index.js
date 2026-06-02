@@ -56,3 +56,11 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => console.log(`onlyStuff API running on port ${PORT}`));
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`Port ${PORT} is already in use. Run: npx kill-port ${PORT}`);
+    process.exit(1);
+  } else {
+    throw err;
+  }
+});
