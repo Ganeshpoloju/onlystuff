@@ -1,71 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
-  <title>Sell on onlyStuff</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="List products and services for your Hyderabad apartment community. No fees, no strangers."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+  <title>Sell on onlyStuff — Zero Commission</title>
 </head>
 <body>
 <nav class="nav">
-  <div class="nav-logo">onlyStuff</div>
+  <a href="index.html" class="nav-logo" style="text-decoration:none">onlyStuff</a>
   <ul class="nav-links">
     <li><a href="how-it-works.html">How it Works</a></li>
     <li><a href="communities.html">Communities</a></li>
-    <li><a href="sellers.html">Sell on onlyStuff</a></li>
+    <li><a href="sellers.html">Sell</a></li>
     <li><a href="about.html">About</a></li>
   </ul>
-  <a href="https://app.onlystuff.in" class="btn btn-primary nav-cta">Start Selling Free</a>
+  <div class="nav-actions">
+    <a href="https://app.onlystuff.in" class="btn btn-primary nav-cta">Get Started</a>
+  </div>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="nav-drawer">
+  <a href="how-it-works.html">How it Works</a>
+  <a href="communities.html">Communities</a>
+  <a href="sellers.html">Sell on onlyStuff</a>
+  <a href="about.html">About</a>
+  <a href="https://app.onlystuff.in" class="btn btn-primary">Get Started — Free</a>
+</div>
 
-<div class="hero">
-  <div class="hero-tag">💰 Zero commission</div>
-  <h1>Sell to people who <span>actually trust you</span></h1>
-  <p>List products and services for your apartment community. No fees, no strangers, no hassle.</p>
-  <div class="hero-btns">
-    <a href="https://app.onlystuff.in" class="btn btn-primary">Start Selling Free</a>
+<div class="page-hero">
+  <div class="container">
+    <span class="tag">💰 Zero commission forever</span>
+    <h1>Sell to people who <span class="grad-text">actually trust you</span></h1>
+    <p>List products or services for your apartment community. Keep 100% of what you earn.</p>
   </div>
 </div>
 
-<div class="section section-center">
-  <div class="section-tag">Why sell on onlyStuff</div>
-  <h2>Everything you need, nothing you don't</h2>
-  <p class="lead">Built for individuals and small sellers in Hyderabad apartment communities.</p>
-  <div class="features">
-    <div class="feature"><div class="feature-icon">🆓</div><h3>Zero Commission</h3><p>Keep 100% of what you earn. We don't take a cut on any transaction.</p></div>
-    <div class="feature"><div class="feature-icon">👥</div><h3>Built-in Buyers</h3><p>Your neighbours are already on the platform. No cold traffic, no paid ads needed.</p></div>
-    <div class="feature"><div class="feature-icon">💲</div><h3>MOQ & Slab Pricing</h3><p>Set minimum order quantities and tiered pricing. Sell in bulk or retail — your choice.</p></div>
-    <div class="feature"><div class="feature-icon">🗓️</div><h3>Smart Scheduling</h3><p>For service providers — intelligent calendar with buffer time. No back-to-back bookings ever.</p></div>
-    <div class="feature"><div class="feature-icon">📦</div><h3>Group Orders</h3><p>Buyers can pool orders to meet your MOQ. More volume per transaction, less coordination overhead.</p></div>
-    <div class="feature"><div class="feature-icon">⭐</div><h3>Build Your Reputation</h3><p>Community vouching and verified reviews help you build a trusted seller profile over time.</p></div>
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal"><h2>Everything a seller needs</h2><p>Built for individuals and small sellers in Hyderabad communities.</p></div>
+    <div class="features">
+      <div class="feature-card reveal"><div class="feature-icon">🆓</div><h3>Zero Commission</h3><p>We take 0% of your earnings. Every rupee stays with you. Core selling is permanently free.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">👥</div><h3>Built-in Buyers</h3><p>Your verified neighbours are already on the platform. No ad spend needed — your community is your market.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">💲</div><h3>MOQ &amp; Slab Pricing</h3><p>Set a minimum order and up to 5 price tiers. Buyers who can't meet MOQ are prompted to start a group buy.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🗓️</div><h3>Smart Scheduling</h3><p>Set working hours, slot duration, and buffer time. No back-to-back, no overbooking — ever.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🔁</div><h3>Recurring Bookings</h3><p>Buyers can set weekly, bi-weekly, or monthly recurring bookings. Steady income, zero admin.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">⭐</div><h3>Build Your Reputation</h3><p>Ratings, community vouching, and an Aadhaar-verified badge. A profile your neighbours genuinely trust.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--bg)">
+  <div class="container">
+    <div class="section-header reveal"><span class="tag">What you can sell</span><h2>Products &amp; Services</h2></div>
+    <div class="features reveal" style="grid-template-columns:1fr 1fr">
+      <div class="feature-card"><div class="feature-icon">📦</div><h3>Products</h3><p style="line-height:2.2">Electronics &nbsp;·&nbsp; Furniture &nbsp;·&nbsp; Clothing &nbsp;·&nbsp; Books &nbsp;·&nbsp; Groceries &nbsp;·&nbsp; Plants &nbsp;·&nbsp; Baby items &nbsp;·&nbsp; Home decor &nbsp;·&nbsp; Vehicles &nbsp;·&nbsp; Toys &nbsp;·&nbsp; Sports &amp; Fitness &nbsp;·&nbsp; Kitchen &amp; Appliances</p></div>
+      <div class="feature-card"><div class="feature-icon">🔧</div><h3>Services</h3><p style="line-height:2.2">Home Repairs &nbsp;·&nbsp; Cleaning &nbsp;·&nbsp; Tutoring &nbsp;·&nbsp; Fitness &nbsp;·&nbsp; Pet Care &nbsp;·&nbsp; Beauty &amp; Grooming &nbsp;·&nbsp; Photography &nbsp;·&nbsp; Music &amp; Arts &nbsp;·&nbsp; IT Support &nbsp;·&nbsp; Transport &amp; Moving</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal"><span class="tag">Pricing example</span><h2>Set the price that works for you</h2></div>
+    <div class="reveal" style="max-width:560px;margin:0 auto">
+      <div class="pricing-card">
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Example: Organic Vegetable Seller</p>
+        <table style="width:100%;border-collapse:collapse;font-size:14px">
+          <thead><tr style="border-bottom:2px solid var(--border)"><th style="text-align:left;padding:10px 8px;color:var(--text-muted)">Qty</th><th style="text-align:right;padding:10px 8px;color:var(--text-muted)">Price/kg</th><th style="text-align:right;padding:10px 8px;color:var(--text-muted)">Saving</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 8px">1–4 kg</td><td style="padding:10px 8px;text-align:right;font-weight:600">₹120</td><td style="padding:10px 8px;text-align:right;color:var(--text-light)">—</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 8px">5–9 kg</td><td style="padding:10px 8px;text-align:right;font-weight:600">₹100</td><td style="padding:10px 8px;text-align:right;color:#16a34a">−17%</td></tr>
+            <tr><td style="padding:10px 8px">10 kg+</td><td style="padding:10px 8px;text-align:right;font-weight:600">₹85</td><td style="padding:10px 8px;text-align:right;color:#16a34a">−29%</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:16px">Set MOQ = 5 kg. Buyers below MOQ are prompted to start a group buy — you still get a 5kg+ order.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="cta-section reveal">
+    <h2>Start selling in 5 minutes</h2>
+    <p>Sign in with Google, verify your identity, and list your first item today.</p>
+    <div class="cta-btns">
+      <a href="https://app.onlystuff.in" class="btn btn-white btn-lg">Create Your First Listing</a>
+    </div>
   </div>
 </div>
-
-<div style="background:#f9f7f5;padding:1px 0;">
-<div class="section section-center">
-  <div class="section-tag">What you can sell</div>
-  <h2>Products & Services</h2>
-  <p class="lead">From second-hand electronics to weekly home cleaning — onlyStuff supports it all.</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:600px;margin:0 auto;text-align:left;">
-    <div class="feature"><h3>📦 Products</h3><p>Electronics · Furniture · Clothing · Books · Groceries · Plants · Baby items · Home decor · And more</p></div>
-    <div class="feature"><h3>🔧 Services</h3><p>Home repairs · Tutoring · Cleaning · Pet care · Fitness · Photography · IT support · And more</p></div>
-  </div>
-</div>
-</div>
-
-<div class="cta-band">
-  <h2>Start selling in 5 minutes</h2>
-  <p>Sign in with Google, verify your identity, and list your first item today.</p>
-  <a href="https://app.onlystuff.in" class="btn btn-white">Create Your First Listing</a>
-</div>
-
 <footer>
-  <div class="footer-inner">
-    <div><div class="footer-logo">onlyStuff</div><p style="font-size:13px;">Hyderabad's hyperlocal community marketplace.</p></div>
-    <div><h4>Platform</h4><ul><li><a href="index.html">Home</a></li><li><a href="how-it-works.html">How it Works</a></li><li><a href="communities.html">Communities</a></li></ul></div>
-    <div><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="mailto:support@onlystuff.in">Contact</a></li></ul></div>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-logo">onlyStuff</div>
+        <p class="footer-brand-desc">Hyderabad's hyperlocal community marketplace. Buy and sell with Aadhaar-verified neighbours.</p>
+      </div>
+      <div class="footer-col"><h4>Platform</h4><ul>
+        <li><a href="how-it-works.html">How it Works</a></li>
+        <li><a href="communities.html">Communities</a></li>
+        <li><a href="sellers.html">Sell on onlyStuff</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="mailto:support@onlystuff.in">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 onlyStuff. Made with ❤️ in Hyderabad.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a><a href="#">Terms</a>
+        <a href="mailto:support@onlystuff.in">Support</a>
+      </div>
+    </div>
   </div>
-  <div class="footer-bottom"><p>© 2026 onlyStuff. Made with ❤️ in Hyderabad.</p></div>
 </footer>
 <script src="js/main.js"></script>
 </body>

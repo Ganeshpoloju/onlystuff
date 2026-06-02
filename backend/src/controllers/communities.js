@@ -1,4 +1,5 @@
 const prisma = require('../config/db');
+const { geocode, haversineKm } = require('../services/geoService');
 
 async function listCommunities(req, res, next) {
   try {
@@ -24,14 +25,22 @@ async function getCommunity(req, res, next) {
 
 async function requestCommunity(req, res, next) {
   try {
-    const { name, address, lat, lng, householdCount } = req.body;
-    if (!name || !address || !lat || !lng) {
-      return res.status(400).json({ error: 'name, address, lat, lng are required' });
+    const { name, address, householdCount } = req.body;
+    let { lat, lng } = req.body;
+    if (!name || !address) {
+      return res.status(400).json({ error: 'name and address are required' });
     }
+    // If lat/lng not provided by the map pin, geocode the address
+    if (!lat || !lng) {
+      const coords = await geocode(address);
+      if (!coords) return res.status(400).json({ error: 'Could not geocode address. Please drop a pin on the map.' });
+      lat = coords.lat;
+      lng = coords.lng;
+    }
+    const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '-' + Date.now();
     const request = await prisma.community.create({
       data: {
-        name,
-        address,
+        name, address, slug,
         lat: parseFloat(lat),
         lng: parseFloat(lng),
         householdCount: householdCount ? parseInt(householdCount) : null,
@@ -43,4 +52,14 @@ async function requestCommunity(req, res, next) {
   } catch (err) { next(err); }
 }
 
-module.exports = { listCommunities, getCommunity, requestCommunity };
+async function getNearestCommunity(req, res, next) {
+  try {
+    const { lat, lng } = req.query;
+    if (!lat || !lng) return res.status(400).json({ error: 'lat and lng required' });
+    const { findNearestCommunity } = require('../services/geoService');
+    const community = await findNearestCommunity(prisma, parseFloat(lat), parseFloat(lng));
+    res.json({ community });
+  } catch (err) { next(err); }
+}
+
+module.exports = { listCommunities, getCommunity, requestCommunity, getNearestCommunity };

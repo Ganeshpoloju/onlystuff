@@ -1,145 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="onlyStuff — Hyderabad's hyperlocal community marketplace. Buy and sell with your neighbours, unlock group pricing, and book local services." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Buy and sell with Aadhaar-verified neighbours in your Hyderabad apartment community."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
   <title>onlyStuff — Your Neighbourhood Marketplace</title>
 </head>
 <body>
-
 <nav class="nav">
-  <div class="nav-logo">onlyStuff</div>
+  <a href="index.html" class="nav-logo" style="text-decoration:none">onlyStuff</a>
   <ul class="nav-links">
     <li><a href="how-it-works.html">How it Works</a></li>
     <li><a href="communities.html">Communities</a></li>
-    <li><a href="sellers.html">Sell on onlyStuff</a></li>
+    <li><a href="sellers.html">Sell</a></li>
     <li><a href="about.html">About</a></li>
   </ul>
-  <a href="https://app.onlystuff.in" class="btn btn-primary nav-cta">Get Started</a>
+  <div class="nav-actions">
+    <a href="https://app.onlystuff.in" class="btn btn-primary nav-cta">Get Started</a>
+  </div>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="nav-drawer">
+  <a href="how-it-works.html">How it Works</a>
+  <a href="communities.html">Communities</a>
+  <a href="sellers.html">Sell on onlyStuff</a>
+  <a href="about.html">About</a>
+  <a href="https://app.onlystuff.in" class="btn btn-primary">Get Started — Free</a>
+</div>
 
 <section class="hero">
-  <div class="hero-tag">🏘️ Hyderabad's Community Marketplace</div>
-  <h1>Buy & sell with your <span>neighbours</span></h1>
-  <p>onlyStuff brings the trust of knowing your seller to online commerce. Shop from verified residents in your apartment community.</p>
-  <div class="hero-btns">
-    <a href="https://app.onlystuff.in" class="btn btn-primary">Start Shopping</a>
-    <a href="sellers.html" class="btn btn-secondary">Start Selling</a>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow"><span class="tag">🏘️ Hyderabad's Community Marketplace</span></div>
+        <h1>Buy &amp; sell with people you <span class="grad-text">actually know</span></h1>
+        <p class="hero-desc">Every seller on onlyStuff is Aadhaar-verified and lives near you. No scams, no strangers — just your neighbours.</p>
+        <div class="hero-btns">
+          <a href="https://app.onlystuff.in" class="btn btn-primary btn-lg">Start for Free</a>
+          <a href="how-it-works.html" class="btn btn-secondary btn-lg">See How it Works</a>
+        </div>
+        <div class="hero-social-proof">
+          <div class="hero-avatars">
+            <div class="hero-avatar-item">R</div>
+            <div class="hero-avatar-item">P</div>
+            <div class="hero-avatar-item">A</div>
+            <div class="hero-avatar-item">S</div>
+            <div class="hero-avatar-item">K</div>
+          </div>
+          <p class="hero-social-text"><strong>500+ residents</strong> already trading in their communities</p>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-status">
+              <span class="phone-status-time">9:41</span>
+              <div class="phone-status-icons"><span></span><span></span><span></span></div>
+            </div>
+            <div class="phone-app-header">
+              <span class="phone-app-logo">onlyStuff</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+            </div>
+            <div class="phone-search"><div class="phone-search-icon"></div><span>Search your community…</span></div>
+            <div class="phone-section-label">Near you · Prestige High Fields</div>
+            <div class="phone-cards">
+              <div class="phone-card"><div class="phone-card-img c1">💻</div><div class="phone-card-body"><div class="phone-card-title">MacBook Pro 2021</div><div class="phone-card-price">₹85,000</div><div class="phone-card-dist">📍 0.2 km</div></div></div>
+              <div class="phone-card"><div class="phone-card-img c2">🛋️</div><div class="phone-card-body"><div class="phone-card-title">IKEA Sofa Set</div><div class="phone-card-price">₹12,000</div><div class="phone-card-dist">📍 Same block</div></div></div>
+              <div class="phone-card"><div class="phone-card-img c3">🌿</div><div class="phone-card-body"><div class="phone-card-title">Organic Veggies</div><div class="phone-card-price">From ₹40</div><div class="phone-card-dist">👥 Group Buy</div></div></div>
+              <div class="phone-card"><div class="phone-card-img c4">🔧</div><div class="phone-card-body"><div class="phone-card-title">AC Repair</div><div class="phone-card-price">₹350/visit</div><div class="phone-card-dist">📅 Today 3pm</div></div></div>
+            </div>
+            <div class="phone-bottom-nav">
+              <div class="phone-nav-item"><div class="phone-nav-icon active"></div><div class="phone-nav-label active">Buy</div></div>
+              <div class="phone-nav-item"><div class="phone-nav-icon inactive"></div><div class="phone-nav-label">Sell</div></div>
+              <div class="phone-nav-item"><div class="phone-nav-icon inactive"></div><div class="phone-nav-label">Chat</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-badge badge-top"><div class="phone-badge-icon">✅</div><div><div class="phone-badge-text">Aadhaar Verified</div><div class="phone-badge-sub">Every seller verified</div></div></div>
+        <div class="phone-badge badge-mid"><div class="phone-badge-icon">👥</div><div><div class="phone-badge-text">Group Buy Live</div><div class="phone-badge-sub">32 / 50 units joined</div></div></div>
+        <div class="phone-badge badge-bot"><div class="phone-badge-icon">⭐</div><div><div class="phone-badge-text">4.9 · Ravi K.</div><div class="phone-badge-sub">Your neighbour</div></div></div>
+      </div>
+    </div>
   </div>
-  <div class="hero-img">🛍️</div>
 </section>
 
-<div class="section section-center">
-  <div class="section-tag">Why onlyStuff</div>
-  <h2>Commerce built on trust</h2>
-  <p class="lead">Every seller on onlyStuff is Aadhaar-verified and a real member of your community. No scams, no strangers.</p>
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon">🛡️</div>
-      <h3>Verified Identity</h3>
-      <p>Every user completes Aadhaar verification before they can buy or sell. You always know who you're dealing with.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">📍</div>
-      <h3>Your Community First</h3>
-      <p>See listings from your own apartment complex before anywhere else. Shorter distances, easier handoffs.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">👥</div>
-      <h3>Group Buying</h3>
-      <p>Pool orders with neighbours to hit MOQ and unlock better pricing. Everyone wins when you buy together.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🔧</div>
-      <h3>Book Local Services</h3>
-      <p>Find plumbers, tutors, cleaners, and more within your community. Book time slots with intelligent scheduling.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">💬</div>
-      <h3>Chat with Sellers</h3>
-      <p>Every listing has a built-in chat. Ask questions, negotiate, and coordinate pickup — all in one place.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🚚</div>
-      <h3>Flexible Delivery</h3>
-      <p>Self-pickup, book a delivery partner, or arrange directly with the seller. You decide how it gets to you.</p>
-    </div>
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">25+</div><div class="stat-label">Communities</div></div>
+    <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Verified Users</div></div>
+    <div class="stat-item"><div class="stat-num">₹0</div><div class="stat-label">Commission</div></div>
+    <div class="stat-item"><div class="stat-num">24h</div><div class="stat-label">Verification SLA</div></div>
   </div>
 </div>
 
-<div style="background:#f9f7f5; padding: 1px 0;">
-<div class="section section-center">
-  <div class="section-tag">How it works</div>
-  <h2>Up and running in minutes</h2>
-  <p class="lead">No lengthy setup. Sign in, verify your identity, and start trading with your community.</p>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><h3>Sign in with Google</h3><p>No passwords to remember. One tap and you're in.</p></div>
-    <div class="step"><div class="step-num">2</div><h3>Verify with Aadhaar</h3><p>Upload your Aadhaar card. Our team verifies it within 24 hours.</p></div>
-    <div class="step"><div class="step-num">3</div><h3>Join your community</h3><p>We place you in your apartment community automatically.</p></div>
-    <div class="step"><div class="step-num">4</div><h3>Buy or sell anything</h3><p>Browse your community's listings or create your first one.</p></div>
-  </div>
-</div>
-</div>
-
-<div class="section section-center">
-  <div class="section-tag">Testimonials</div>
-  <h2>What residents say</h2>
-  <p class="lead">Real stories from real communities across Hyderabad.</p>
-  <div class="testimonials">
-    <div class="testimonial">
-      <p>"I sold my old laptop to a neighbour in 2 hours. No calls from strangers, no haggling with someone 20km away. This is how buying and selling should work."</p>
-      <div class="testimonial-author"><div class="testimonial-avatar">R</div><div><div class="testimonial-name">Ravi K.</div><div class="testimonial-community">Prestige High Fields, Gachibowli</div></div></div>
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">Why onlyStuff</span>
+      <h2>Commerce built on <span class="grad-text">real trust</span></h2>
+      <p>OLX has listings but no community. WhatsApp has community but no commerce. onlyStuff is both.</p>
     </div>
-    <div class="testimonial">
-      <p>"We did a group buy on organic vegetables with 8 families in our block. Saved 30% and we all got fresh produce the same day."</p>
-      <div class="testimonial-author"><div class="testimonial-avatar">P</div><div><div class="testimonial-name">Priya S.</div><div class="testimonial-community">Indu Fortune Fields, Kondapur</div></div></div>
-    </div>
-    <div class="testimonial">
-      <p>"I'm a freelance photographer. Booking slots through onlyStuff is so clean — my calendar fills up and I never have back-to-back bookings anymore."</p>
-      <div class="testimonial-author"><div class="testimonial-avatar">A</div><div><div class="testimonial-name">Arun M.</div><div class="testimonial-community">Brigade Buena Vista, Miyapur</div></div></div>
+    <div class="features">
+      <div class="feature-card reveal"><div class="feature-icon">🛡️</div><h3>Verified Identity</h3><p>Every user completes Aadhaar verification before accessing the platform. You always know who you're dealing with.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">📍</div><h3>Community First</h3><p>Search shows your apartment complex first, then nearby, then city-wide. Closer seller means easier handoff.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">👥</div><h3>Group Buying</h3><p>Pool orders with neighbours to meet MOQ and unlock bulk pricing. One tap to start — anyone can join.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🗓️</div><h3>Book Local Services</h3><p>Find tutors, plumbers, trainers and more. Smart scheduling with enforced buffer time — never back-to-back.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">💬</div><h3>Built-in Chat</h3><p>Every listing has its own chat thread. Negotiate, share photos, coordinate pickup — no switching apps.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🚚</div><h3>Flexible Delivery</h3><p>Self-pickup, book a delivery partner at checkout, or arrange directly via chat. You decide.</p></div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="cta-band">
-  <h2>Your community is already here</h2>
-  <p>25+ apartment communities across Hyderabad are on onlyStuff. Find yours today.</p>
-  <a href="https://app.onlystuff.in" class="btn btn-white">Join onlyStuff — It's Free</a>
-</div>
+<section class="section" style="background:var(--bg)">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">How it Works</span>
+      <h2>Up and running in <span class="grad-text">5 minutes</span></h2>
+      <p>No forms, no passwords, no waiting weeks.</p>
+    </div>
+    <div class="steps-wrap reveal">
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><h3>Sign in with Google</h3><p>One tap. No username or password. Ever.</p></div>
+        <div class="step"><div class="step-num">2</div><h3>Upload Aadhaar</h3><p>Front and back. Verified within 24 hours.</p></div>
+        <div class="step"><div class="step-num">3</div><h3>Join your community</h3><p>Auto-placed by address. New society? Request it.</p></div>
+        <div class="step"><div class="step-num">4</div><h3>Buy or sell anything</h3><p>Browse listings, post your own, or start a group buy.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">Testimonials</span>
+      <h2>What residents are saying</h2>
+      <p>From Gachibowli to Miyapur — real people, real transactions.</p>
+    </div>
+    <div class="testimonials">
+      <div class="testimonial reveal">
+        <div class="testimonial-quote">"</div>
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testimonial-text">Sold my MacBook to a neighbour in the same building within 2 hours. No calls from strangers, no 20km drives. Exactly how it should work.</p>
+        <div class="testimonial-author"><div class="testimonial-avatar">R</div><div><div class="testimonial-name">Ravi K.</div><div class="testimonial-community">Prestige High Fields, Gachibowli</div></div></div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial-quote">"</div>
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testimonial-text">8 families did a group buy on organic vegetables, saved 30%, and got fresh produce the same day. Would never have happened without onlyStuff.</p>
+        <div class="testimonial-author"><div class="testimonial-avatar">P</div><div><div class="testimonial-name">Priya S.</div><div class="testimonial-community">Indu Fortune Fields, Kondapur</div></div></div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial-quote">"</div>
+        <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testimonial-text">Smart scheduling for my photography service is a game-changer. Buffer times are automatic — I never have back-to-back sessions anymore.</p>
+        <div class="testimonial-author"><div class="testimonial-avatar">A</div><div><div class="testimonial-name">Arun M.</div><div class="testimonial-community">Brigade Buena Vista, Miyapur</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm">
+  <div class="container">
+    <div class="trust-strip reveal">
+      <div class="trust-item"><div class="trust-icon">🔒</div><div><div class="trust-label">Aadhaar Verified</div><div class="trust-sub">Every single user</div></div></div>
+      <div class="trust-item"><div class="trust-icon">🆓</div><div><div class="trust-label">Zero Commission</div><div class="trust-sub">Keep 100% of earnings</div></div></div>
+      <div class="trust-item"><div class="trust-icon">📍</div><div><div class="trust-label">Hyderabad Only</div><div class="trust-sub">Tight community focus</div></div></div>
+      <div class="trust-item"><div class="trust-icon">⭐</div><div><div class="trust-label">Community Vouching</div><div class="trust-sub">Neighbours vouch for sellers</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="cta-section reveal">
+    <h2>Your community is already here</h2>
+    <p>25+ apartment complexes across Hyderabad. Find yours — or add it.</p>
+    <div class="cta-btns">
+      <a href="https://app.onlystuff.in" class="btn btn-white btn-lg">Join onlyStuff — It's Free</a>
+      <a href="communities.html" class="btn btn-lg" style="background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.25)">Browse Communities</a>
+    </div>
+  </div>
+</div>
 <footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-logo">onlyStuff</div>
-      <p style="font-size:13px;line-height:1.7;">Hyderabad's hyperlocal community marketplace. Buy and sell with verified neighbours.</p>
-    </div>
-    <div>
-      <h4>Platform</h4>
-      <ul>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-logo">onlyStuff</div>
+        <p class="footer-brand-desc">Hyderabad's hyperlocal community marketplace. Buy and sell with Aadhaar-verified neighbours.</p>
+      </div>
+      <div class="footer-col"><h4>Platform</h4><ul>
         <li><a href="how-it-works.html">How it Works</a></li>
         <li><a href="communities.html">Communities</a></li>
         <li><a href="sellers.html">Sell on onlyStuff</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Company</h4>
-      <ul>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
         <li><a href="about.html">About</a></li>
         <li><a href="mailto:support@onlystuff.in">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul>
         <li><a href="#">Privacy Policy</a></li>
         <li><a href="#">Terms of Service</a></li>
-      </ul>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 onlyStuff. Made with ❤️ in Hyderabad.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a><a href="#">Terms</a>
+        <a href="mailto:support@onlystuff.in">Support</a>
+      </div>
     </div>
   </div>
-  <div class="footer-bottom">
-    <p>© 2026 onlyStuff. Made with ❤️ in Hyderabad.</p>
-  </div>
 </footer>
-
 <script src="js/main.js"></script>
 </body>
 </html>

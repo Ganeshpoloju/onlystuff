@@ -1,61 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Building the trust layer for neighbourhood commerce in Hyderabad."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
   <title>About — onlyStuff</title>
 </head>
 <body>
 <nav class="nav">
-  <div class="nav-logo">onlyStuff</div>
+  <a href="index.html" class="nav-logo" style="text-decoration:none">onlyStuff</a>
   <ul class="nav-links">
     <li><a href="how-it-works.html">How it Works</a></li>
     <li><a href="communities.html">Communities</a></li>
-    <li><a href="sellers.html">Sell on onlyStuff</a></li>
+    <li><a href="sellers.html">Sell</a></li>
     <li><a href="about.html">About</a></li>
   </ul>
-  <a href="https://app.onlystuff.in" class="btn btn-primary nav-cta">Get Started</a>
+  <div class="nav-actions">
+    <a href="https://app.onlystuff.in" class="btn btn-primary nav-cta">Get Started</a>
+  </div>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
-
-<div class="hero" style="padding:60px 32px;">
-  <h1 style="font-size:clamp(28px,4vw,48px)">About <span>onlyStuff</span></h1>
-  <p>We're building the trust layer for neighbourhood commerce.</p>
+<div class="nav-drawer">
+  <a href="how-it-works.html">How it Works</a>
+  <a href="communities.html">Communities</a>
+  <a href="sellers.html">Sell on onlyStuff</a>
+  <a href="about.html">About</a>
+  <a href="https://app.onlystuff.in" class="btn btn-primary">Get Started — Free</a>
 </div>
 
-<div class="section" style="max-width:720px;">
-  <h2 style="margin-bottom:20px;">Why we built this</h2>
-  <p style="color:#444;font-size:16px;line-height:1.8;margin-bottom:20px;">
-    Hyderabad has thousands of apartment communities. Each one is a micro-economy — residents with things to sell, services to offer, and needs to fill. But when someone wants to sell their old laptop or find a reliable tutor, they're stuck posting on anonymous platforms where trust is hard to establish.
-  </p>
-  <p style="color:#444;font-size:16px;line-height:1.8;margin-bottom:20px;">
-    onlyStuff is different. We start with identity. Every user is Aadhaar-verified. Every transaction is between people who live near each other. When you buy from someone on onlyStuff, you know they're a real, verified resident — not an anonymous account.
-  </p>
-  <p style="color:#444;font-size:16px;line-height:1.8;margin-bottom:40px;">
-    We started in Hyderabad because it's home. Our goal is to make onlyStuff the default way apartment communities trade with each other.
-  </p>
-
-  <h2 style="margin-bottom:20px;">Our principles</h2>
-  <div class="features">
-    <div class="feature"><div class="feature-icon">🛡️</div><h3>Trust first</h3><p>Identity verification isn't optional. Every user on onlyStuff is who they say they are.</p></div>
-    <div class="feature"><div class="feature-icon">🏘️</div><h3>Community first</h3><p>Local discovery, local transactions. Shorter distances, more trust, less friction.</p></div>
-    <div class="feature"><div class="feature-icon">🆓</div><h3>Free to start</h3><p>Zero commission at launch. We grow when our communities grow, not before.</p></div>
-  </div>
-
-  <div style="margin-top:48px;padding:32px;background:#f9f7f5;border-radius:16px;">
-    <h3 style="margin-bottom:8px;">Get in touch</h3>
-    <p style="color:#666;font-size:14px;margin-bottom:12px;">Questions, feedback, or want to bring onlyStuff to your community?</p>
-    <a href="mailto:support@onlystuff.in" class="btn btn-primary">support@onlystuff.in</a>
+<div class="page-hero">
+  <div class="container">
+    <span class="tag">Our story</span>
+    <h1>About <span class="grad-text">onlyStuff</span></h1>
+    <p>Building the trust layer for neighbourhood commerce.</p>
   </div>
 </div>
 
+<section class="section">
+  <div class="container" style="max-width:720px">
+    <div class="reveal">
+      <h2 style="font-size:28px;font-weight:800;margin-bottom:20px">Why we built this</h2>
+      <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:20px">Hyderabad has thousands of apartment communities. Each one is a micro-economy — residents with things to sell, services to offer, and needs to fill. But when someone wants to sell their old laptop or find a reliable tutor, they resort to anonymous platforms where trust is near-impossible to establish.</p>
+      <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:20px">onlyStuff starts with identity. Every user is Aadhaar-verified. Every transaction is between people who live near each other. When you buy from someone on onlyStuff, you know they're a real, verified resident — not an anonymous account from anywhere in the country.</p>
+      <p style="font-size:16px;color:#444;line-height:1.8;margin-bottom:48px">We started in Hyderabad because it's home. Our goal is to make onlyStuff the default way apartment communities trade with each other.</p>
+    </div>
+
+    <div class="section-header reveal" style="text-align:left;margin-bottom:32px"><h2>Our principles</h2></div>
+    <div class="values-grid reveal">
+      <div class="value-card"><div class="value-icon">🛡️</div><h3>Trust first</h3><p>Identity verification is not optional. Every user on onlyStuff is who they say they are.</p></div>
+      <div class="value-card"><div class="value-icon">🏘️</div><h3>Community first</h3><p>Local discovery, local transactions. Shorter distances, more trust, less friction.</p></div>
+      <div class="value-card"><div class="value-icon">🆓</div><h3>Free to start</h3><p>Zero commission. We grow when our communities grow — not before.</p></div>
+    </div>
+
+    <div class="reveal" style="margin-top:64px;background:var(--bg-warm);border-radius:var(--radius-lg);padding:40px">
+      <h3 style="font-size:20px;font-weight:800;margin-bottom:8px">Get in touch</h3>
+      <p style="color:var(--text-muted);margin-bottom:20px">Questions, feedback, or want to bring onlyStuff to your community?</p>
+      <a href="mailto:support@onlystuff.in" class="btn btn-primary">support@onlystuff.in</a>
+    </div>
+  </div>
+</section>
 <footer>
-  <div class="footer-inner">
-    <div><div class="footer-logo">onlyStuff</div><p style="font-size:13px;">Hyderabad's hyperlocal community marketplace.</p></div>
-    <div><h4>Platform</h4><ul><li><a href="index.html">Home</a></li><li><a href="how-it-works.html">How it Works</a></li><li><a href="sellers.html">Sell</a></li></ul></div>
-    <div><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="mailto:support@onlystuff.in">Contact</a></li></ul></div>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-logo">onlyStuff</div>
+        <p class="footer-brand-desc">Hyderabad's hyperlocal community marketplace. Buy and sell with Aadhaar-verified neighbours.</p>
+      </div>
+      <div class="footer-col"><h4>Platform</h4><ul>
+        <li><a href="how-it-works.html">How it Works</a></li>
+        <li><a href="communities.html">Communities</a></li>
+        <li><a href="sellers.html">Sell on onlyStuff</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="mailto:support@onlystuff.in">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 onlyStuff. Made with ❤️ in Hyderabad.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a><a href="#">Terms</a>
+        <a href="mailto:support@onlystuff.in">Support</a>
+      </div>
+    </div>
   </div>
-  <div class="footer-bottom"><p>© 2026 onlyStuff. Made with ❤️ in Hyderabad.</p></div>
 </footer>
 <script src="js/main.js"></script>
 </body>

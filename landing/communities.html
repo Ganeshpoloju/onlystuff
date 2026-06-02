@@ -1,95 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="25+ Hyderabad apartment communities on onlyStuff. Find yours or request a new one."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
   <title>Communities — onlyStuff</title>
 </head>
 <body>
 <nav class="nav">
-  <div class="nav-logo">onlyStuff</div>
+  <a href="index.html" class="nav-logo" style="text-decoration:none">onlyStuff</a>
   <ul class="nav-links">
     <li><a href="how-it-works.html">How it Works</a></li>
     <li><a href="communities.html">Communities</a></li>
-    <li><a href="sellers.html">Sell on onlyStuff</a></li>
+    <li><a href="sellers.html">Sell</a></li>
     <li><a href="about.html">About</a></li>
   </ul>
-  <a href="https://app.onlystuff.in" class="btn btn-primary nav-cta">Get Started</a>
+  <div class="nav-actions">
+    <a href="https://app.onlystuff.in" class="btn btn-primary nav-cta">Get Started</a>
+  </div>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
-
-<div class="hero" style="padding:60px 32px;">
-  <div class="section-tag">25+ communities</div>
-  <h1 style="font-size:clamp(28px,4vw,48px)">Find your community</h1>
-  <p>onlyStuff is live in these Hyderabad apartment communities. Don't see yours? Join and request it.</p>
+<div class="nav-drawer">
+  <a href="how-it-works.html">How it Works</a>
+  <a href="communities.html">Communities</a>
+  <a href="sellers.html">Sell on onlyStuff</a>
+  <a href="about.html">About</a>
+  <a href="https://app.onlystuff.in" class="btn btn-primary">Get Started — Free</a>
 </div>
 
-<div class="section">
-  <h2 style="margin-bottom:8px;">Gachibowli / Financial District</h2>
-  <div class="community-grid" style="margin-bottom:40px;">
-    <div class="community-chip">Aparna Sarovar<span>Nallagandla</span></div>
-    <div class="community-chip">My Home Bhooja<span>Manikonda</span></div>
-    <div class="community-chip">Prestige High Fields<span>Gachibowli</span></div>
-    <div class="community-chip">Mantri Serene<span>Gachibowli</span></div>
-    <div class="community-chip">Lodha Bellezza<span>Kokapet</span></div>
-  </div>
-
-  <h2 style="margin-bottom:8px;">Kondapur / Madhapur / HITEC City</h2>
-  <div class="community-grid" style="margin-bottom:40px;">
-    <div class="community-chip">Indu Fortune Fields<span>Kondapur</span></div>
-    <div class="community-chip">Aditya Meadows<span>Kondapur</span></div>
-    <div class="community-chip">NSL Klassik<span>Madhapur</span></div>
-    <div class="community-chip">Vasavi Signature<span>Madhapur</span></div>
-  </div>
-
-  <h2 style="margin-bottom:8px;">Manikonda / Puppalaguda</h2>
-  <div class="community-grid" style="margin-bottom:40px;">
-    <div class="community-chip">My Home Jewel<span>Manikonda</span></div>
-    <div class="community-chip">Prestige Falcon City<span>Manikonda</span></div>
-    <div class="community-chip">Aparna Western Meadows<span>Puppalaguda</span></div>
-  </div>
-
-  <h2 style="margin-bottom:8px;">Kukatpally / KPHB</h2>
-  <div class="community-grid" style="margin-bottom:40px;">
-    <div class="community-chip">NCC Urban One<span>Kukatpally</span></div>
-    <div class="community-chip">KPHB Colony Phase 1<span>KPHB</span></div>
-    <div class="community-chip">KPHB Colony Phase 9<span>KPHB</span></div>
-  </div>
-
-  <h2 style="margin-bottom:8px;">Miyapur / Chandanagar</h2>
-  <div class="community-grid" style="margin-bottom:40px;">
-    <div class="community-chip">Brigade Buena Vista<span>Miyapur</span></div>
-    <div class="community-chip">Rainbow Vistas Rock Garden<span>Miyapur</span></div>
-  </div>
-
-  <h2 style="margin-bottom:8px;">Kompally / Tellapur / Bachupally</h2>
-  <div class="community-grid" style="margin-bottom:40px;">
-    <div class="community-chip">Aliens Space Station<span>Tellapur</span></div>
-    <div class="community-chip">My Home Avatar<span>Tellapur</span></div>
-    <div class="community-chip">Ramky Towers<span>Kompally</span></div>
-    <div class="community-chip">Suchitra Heights<span>Bachupally</span></div>
-  </div>
-
-  <h2 style="margin-bottom:8px;">Banjara Hills / Jubilee Hills</h2>
-  <div class="community-grid" style="margin-bottom:40px;">
-    <div class="community-chip">Vasavi Rock Gardens<span>Banjara Hills</span></div>
-    <div class="community-chip">Aparna Cyber Life<span>Banjara Hills</span></div>
-  </div>
-
-  <div style="background:#fff5f0;border-radius:16px;padding:32px;text-align:center;margin-top:20px;">
-    <p style="font-size:18px;font-weight:700;margin-bottom:8px;">Don't see your community?</p>
-    <p style="color:#666;margin-bottom:20px;">Sign up and submit a request. Our team approves new communities within 24 hours.</p>
-    <a href="https://app.onlystuff.in" class="btn btn-primary">Join & Request Your Community</a>
+<div class="page-hero">
+  <div class="container">
+    <span class="tag">25+ communities live</span>
+    <h1>Find your <span class="grad-text">community</span></h1>
+    <p>onlyStuff is live in these Hyderabad apartment communities. Don't see yours? Join and request it.</p>
   </div>
 </div>
 
+<section class="section">
+  <div class="container">
+    
+    <div style="margin-bottom:48px" class="reveal">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;color:var(--text-muted)">Gachibowli / Financial District / Kokapet</h2>
+      <div class="community-section-grid">
+        <div class="community-chip"><div class="community-chip-name">Aparna Sarovar</div><div class="community-chip-area">Nallagandla</div></div><div class="community-chip"><div class="community-chip-name">My Home Bhooja</div><div class="community-chip-area">Manikonda</div></div><div class="community-chip"><div class="community-chip-name">Prestige High Fields</div><div class="community-chip-area">Gachibowli</div></div><div class="community-chip"><div class="community-chip-name">Mantri Serene</div><div class="community-chip-area">Gachibowli</div></div><div class="community-chip"><div class="community-chip-name">Lodha Bellezza</div><div class="community-chip-area">Kokapet</div></div><div class="community-chip"><div class="community-chip-name">Gachibowli Heights</div><div class="community-chip-area">Gachibowli</div></div>
+      </div>
+    </div>
+    <div style="margin-bottom:48px" class="reveal">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;color:var(--text-muted)">Kondapur / Madhapur / HITEC City</h2>
+      <div class="community-section-grid">
+        <div class="community-chip"><div class="community-chip-name">Indu Fortune Fields</div><div class="community-chip-area">Kondapur</div></div><div class="community-chip"><div class="community-chip-name">Aditya Meadows</div><div class="community-chip-area">Kondapur</div></div><div class="community-chip"><div class="community-chip-name">Kondapur Main Residency</div><div class="community-chip-area">Kondapur</div></div><div class="community-chip"><div class="community-chip-name">NSL Klassik</div><div class="community-chip-area">Madhapur</div></div><div class="community-chip"><div class="community-chip-name">Vasavi Signature</div><div class="community-chip-area">Madhapur</div></div>
+      </div>
+    </div>
+    <div style="margin-bottom:48px" class="reveal">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;color:var(--text-muted)">Manikonda / Puppalaguda</h2>
+      <div class="community-section-grid">
+        <div class="community-chip"><div class="community-chip-name">My Home Jewel</div><div class="community-chip-area">Manikonda</div></div><div class="community-chip"><div class="community-chip-name">Prestige Falcon City</div><div class="community-chip-area">Manikonda</div></div><div class="community-chip"><div class="community-chip-name">Aparna Western Meadows</div><div class="community-chip-area">Puppalaguda</div></div>
+      </div>
+    </div>
+    <div style="margin-bottom:48px" class="reveal">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;color:var(--text-muted)">Kukatpally / KPHB</h2>
+      <div class="community-section-grid">
+        <div class="community-chip"><div class="community-chip-name">NCC Urban One</div><div class="community-chip-area">Kukatpally</div></div><div class="community-chip"><div class="community-chip-name">KPHB Colony Phase 1</div><div class="community-chip-area">KPHB</div></div><div class="community-chip"><div class="community-chip-name">KPHB Colony Phase 9</div><div class="community-chip-area">KPHB</div></div>
+      </div>
+    </div>
+    <div style="margin-bottom:48px" class="reveal">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;color:var(--text-muted)">Miyapur / Chandanagar</h2>
+      <div class="community-section-grid">
+        <div class="community-chip"><div class="community-chip-name">Brigade Buena Vista</div><div class="community-chip-area">Miyapur</div></div><div class="community-chip"><div class="community-chip-name">Rainbow Vistas Rock Garden</div><div class="community-chip-area">Miyapur</div></div>
+      </div>
+    </div>
+    <div style="margin-bottom:48px" class="reveal">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;color:var(--text-muted)">Kompally / Tellapur / Bachupally</h2>
+      <div class="community-section-grid">
+        <div class="community-chip"><div class="community-chip-name">Aliens Space Station</div><div class="community-chip-area">Tellapur</div></div><div class="community-chip"><div class="community-chip-name">My Home Avatar</div><div class="community-chip-area">Tellapur</div></div><div class="community-chip"><div class="community-chip-name">Ramky Towers</div><div class="community-chip-area">Kompally</div></div><div class="community-chip"><div class="community-chip-name">Suchitra Heights</div><div class="community-chip-area">Bachupally</div></div>
+      </div>
+    </div>
+    <div style="margin-bottom:48px" class="reveal">
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px;color:var(--text-muted)">Banjara Hills / Jubilee Hills</h2>
+      <div class="community-section-grid">
+        <div class="community-chip"><div class="community-chip-name">Vasavi Rock Gardens</div><div class="community-chip-area">Banjara Hills</div></div><div class="community-chip"><div class="community-chip-name">Aparna Cyber Life</div><div class="community-chip-area">Banjara Hills</div></div>
+      </div>
+    </div>
+
+    <div class="trust-strip reveal" style="flex-direction:column;align-items:center;text-align:center">
+      <div style="font-size:36px;margin-bottom:12px">🏘️</div>
+      <h3 style="font-size:20px;font-weight:800;margin-bottom:8px">Don't see your community?</h3>
+      <p style="color:var(--text-muted);margin-bottom:20px;max-width:400px">Sign up, enter your address, and submit a request. Added within 24 hours.</p>
+      <a href="https://app.onlystuff.in" class="btn btn-primary">Join &amp; Request Your Community</a>
+    </div>
+  </div>
+</section>
 <footer>
-  <div class="footer-inner">
-    <div><div class="footer-logo">onlyStuff</div><p style="font-size:13px;">Hyderabad's hyperlocal community marketplace.</p></div>
-    <div><h4>Platform</h4><ul><li><a href="index.html">Home</a></li><li><a href="how-it-works.html">How it Works</a></li><li><a href="sellers.html">Sell</a></li></ul></div>
-    <div><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="mailto:support@onlystuff.in">Contact</a></li></ul></div>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-logo">onlyStuff</div>
+        <p class="footer-brand-desc">Hyderabad's hyperlocal community marketplace. Buy and sell with Aadhaar-verified neighbours.</p>
+      </div>
+      <div class="footer-col"><h4>Platform</h4><ul>
+        <li><a href="how-it-works.html">How it Works</a></li>
+        <li><a href="communities.html">Communities</a></li>
+        <li><a href="sellers.html">Sell on onlyStuff</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="mailto:support@onlystuff.in">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 onlyStuff. Made with ❤️ in Hyderabad.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a><a href="#">Terms</a>
+        <a href="mailto:support@onlystuff.in">Support</a>
+      </div>
+    </div>
   </div>
-  <div class="footer-bottom"><p>© 2026 onlyStuff. Made with ❤️ in Hyderabad.</p></div>
 </footer>
 <script src="js/main.js"></script>
 </body>
