@@ -5,7 +5,8 @@ const StorageService = require('./StorageService');
 class GoogleDriveStorage extends StorageService {
   constructor() {
     super();
-    const keyPath = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH;
+    const path = require('path');
+    const keyPath = path.resolve(process.cwd(), process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH);
     const auth = new google.auth.GoogleAuth({
       keyFile: keyPath,
       scopes: ['https://www.googleapis.com/auth/drive'],

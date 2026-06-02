@@ -11,7 +11,9 @@ async function placeOrder(req, res, next) {
     if (listing.sellerId === req.user.id) throw badRequest('Cannot order your own listing');
     if (listing.moq && quantity < listing.moq) throw badRequest(`Minimum order quantity is ${listing.moq}`);
 
-    const unitPrice = listing.pricingModel === 'fixed' ? listing.fixedPrice : resolveSlabPrice(listing, quantity);
+    const unitPrice = listing.pricingModel === 'fixed'
+      ? listing.fixedPrice
+      : await resolveSlabPrice(listingId, parseInt(quantity));
     const order = await prisma.order.create({
       data: {
         listingId, buyerId: req.user.id, sellerId: listing.sellerId,
@@ -28,9 +30,19 @@ async function placeOrder(req, res, next) {
   } catch (err) { next(err); }
 }
 
-function resolveSlabPrice(listing, qty) {
-  // Resolved from priceSlabs — simplified here; full impl queries DB
-  return listing.fixedPrice || 0;
+async function resolveSlabPrice(listingId, qty) {
+  const slabs = await prisma.priceSlab.findMany({
+    where: { listingId },
+    orderBy: { position: 'asc' },
+  });
+  if (!slabs.length) return 0;
+  // Find the slab whose range covers the requested qty
+  for (const slab of slabs) {
+    const inRange = qty >= slab.fromQty && (slab.toQty === null || qty <= slab.toQty);
+    if (inRange) return slab.pricePerUnit;
+  }
+  // Fallback to last slab (open-ended)
+  return slabs[slabs.length - 1].pricePerUnit;
 }
 
 async function listOrders(req, res, next) {

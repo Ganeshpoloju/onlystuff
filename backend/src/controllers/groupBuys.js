@@ -53,14 +53,19 @@ async function joinGroupBuy(req, res, next) {
     const already = gb.members.find(m => m.userId === req.user.id);
     if (already) throw badRequest('Already in this group buy');
 
-    const newQty = gb.committedQty + parseInt(quantity);
-    await prisma.groupBuyMember.create({ data: { groupBuyId: gb.id, userId: req.user.id, quantity: parseInt(quantity) } });
-    const updated = await prisma.groupBuy.update({ where: { id: gb.id }, data: { committedQty: newQty } });
+    const qty = parseInt(quantity);
+    await prisma.groupBuyMember.create({ data: { groupBuyId: gb.id, userId: req.user.id, quantity: qty } });
 
-    getIO().to(`groupbuy:${gb.id}`).emit('groupbuy:member_joined', { userId: req.user.id, committedQty: newQty, targetQty: gb.targetQty });
+    // Atomic increment to avoid race conditions
+    const updated = await prisma.groupBuy.update({
+      where: { id: gb.id },
+      data: { committedQty: { increment: qty } },
+    });
+
+    getIO().to(`groupbuy:${gb.id}`).emit('groupbuy:member_joined', { userId: req.user.id, committedQty: updated.committedQty, targetQty: updated.targetQty });
 
     // Auto-lock when target reached
-    if (newQty >= gb.targetQty) {
+    if (updated.committedQty >= updated.targetQty) {
       await prisma.groupBuy.update({ where: { id: gb.id }, data: { status: 'locked' } });
       getIO().to(`groupbuy:${gb.id}`).emit('groupbuy:locked', { id: gb.id });
     }

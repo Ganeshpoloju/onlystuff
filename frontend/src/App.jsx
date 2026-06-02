@@ -34,6 +34,13 @@ import Analytics from './pages/admin/Analytics';
 import BottomNav from './components/layout/BottomNav';
 import Spinner from './components/ui/Spinner';
 
+function RequireLogin({ children }) {
+  const { user, loading } = useAuthStore();
+  if (loading) return <div className="flex items-center justify-center h-screen"><Spinner /></div>;
+  if (!user) return <Navigate to="/login" replace />;
+  return children;
+}
+
 function ProtectedRoute({ children, requireAdmin = false }) {
   const { user, loading } = useAuthStore();
   if (loading) return <div className="flex items-center justify-center h-screen"><Spinner /></div>;
@@ -64,9 +71,9 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/auth/callback" element={<OAuthCallback />} />
 
-        {/* Onboarding */}
-        <Route path="/onboarding/aadhaar" element={<AadhaarUpload />} />
-        <Route path="/onboarding/pending" element={<PendingVerification />} />
+        {/* Onboarding — requires login but not verified */}
+        <Route path="/onboarding/aadhaar" element={<RequireLogin><AadhaarUpload /></RequireLogin>} />
+        <Route path="/onboarding/pending" element={<RequireLogin><PendingVerification /></RequireLogin>} />
 
         {/* Buy */}
         <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />

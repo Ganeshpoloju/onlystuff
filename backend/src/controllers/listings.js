@@ -28,7 +28,7 @@ async function searchListings(req, res, next) {
         _count: { select: { groupBuys: true } },
       },
       orderBy: { createdAt: 'desc' },
-      skip: (page - 1) * limit,
+      skip: (parseInt(page) - 1) * parseInt(limit),
       take: parseInt(limit),
     });
 
