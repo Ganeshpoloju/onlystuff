@@ -51,7 +51,8 @@ class GoogleDriveStorage extends StorageService {
       requestBody: { role: 'reader', type: 'anyone' },
     });
 
-    return `https://drive.google.com/uc?export=view&id=${res.data.id}`;
+    // Use thumbnail URL — renders correctly in <img> tags unlike uc?export=view
+    return `https://drive.google.com/thumbnail?id=${res.data.id}&sz=w800`;
   }
 
   async getUrl(fileId) {
